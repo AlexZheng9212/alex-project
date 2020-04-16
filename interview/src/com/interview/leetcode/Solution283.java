@@ -19,7 +19,7 @@ public class Solution283 {
   }
   public static void main(String[] args) {
     Solution283 s = new Solution283();
-    int[] nums = new int[]{0,1,0,3,12};
+    int[] nums = new int[]{0,1,0,0,3,12};
     s.moveZeroes(nums);
     for(int num : nums){
       System.out.println(num);
