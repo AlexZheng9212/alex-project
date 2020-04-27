@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alex.blog.mapper.CategoryMapper">
+<sql id="categoryColumns">
+id,
+parentId,
+name,
+rank,
+description
+</sql>
+<insert id="create">
+INSERT INTO blog_category(<include refid="categoryColumns"/>)
+VALUES (
+  #{category.id},#{category.parentId},#{category.name},#{category.rank},#{category.description},now(),now()
+)
+</insert>
+
+<update id="update">
+UPDATE blog_category 
+<set>
+name = #{name},
+updatedAt = now()
+</set>
+WHERE id = #{id}
+</update>
+
+<select id="findById">
+SELECT <include refid="categoryColumns"/> FROM blog_category
+WHERE id = #{id}
+</select>
+
+</mapper>

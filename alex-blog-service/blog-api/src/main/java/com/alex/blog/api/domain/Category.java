@@ -5,11 +5,11 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class Category {
-  public String id = RandomStringUtils.random(6);
+  public String id = RandomStringUtils.randomAlphabetic(6);
   public String parentId = null;
   @NotNull
   public String name = null;
-  public String descripition = null;
+  public String description = null;
   @NotNull
   public Integer rank = null;
 
@@ -38,11 +38,11 @@ public class Category {
   }
 
   public String getDescripition() {
-    return descripition;
+    return description;
   }
 
-  public void setDescripition(String descripition) {
-    this.descripition = descripition;
+  public void setDescripition(String description) {
+    this.description = description;
   }
 
   public Integer getRank() {
