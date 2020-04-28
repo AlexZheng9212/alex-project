@@ -1,7 +1,6 @@
 package com.alex.blog.api;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.alex.blog.api.domain.Article;
 import com.alex.common.error.ExecFailure;
