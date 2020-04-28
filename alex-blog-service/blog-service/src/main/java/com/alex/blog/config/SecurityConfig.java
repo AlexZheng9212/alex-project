@@ -14,7 +14,8 @@ public class SecurityConfig {
   public static class XAuthTokenSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      http.csrf().disable().authorizeRequests().antMatchers("/api/category").permitAll().antMatchers("/health-checker").permitAll();
+      http.csrf().disable().authorizeRequests().antMatchers("/api/categories").permitAll().antMatchers("/api/articles")
+          .permitAll().antMatchers("/health-checker").permitAll();
     }
   }
 }

@@ -1,4 +1,4 @@
-package com.alex.blog.utils;
+package com.alex.common.utils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

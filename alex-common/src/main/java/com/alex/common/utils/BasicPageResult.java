@@ -1,4 +1,4 @@
-package com.alex.blog.api.domain;
+package com.alex.common.utils;
 
 import java.util.List;
 
@@ -16,4 +16,6 @@ public class BasicPageResult<T> {
   public List<T> getData() {
     return data;
   }
+
+
 }

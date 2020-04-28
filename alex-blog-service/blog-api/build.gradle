@@ -23,11 +23,9 @@ repositories {
 dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:28.2-jre'
-    compile group: 'javax.validation', name: 'validation-api', version: '1.1.0.Final'
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
-	compile "io.vavr:vavr:0.9.0"
-    compile "com.fasterxml.jackson.core:jackson-annotations:2.9.4"
+    implementation(project(":alex-common"))
 
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }

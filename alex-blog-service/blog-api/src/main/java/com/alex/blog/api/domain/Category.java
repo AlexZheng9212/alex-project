@@ -2,15 +2,12 @@ package com.alex.blog.api.domain;
 
 import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 public class Category {
-  public String id = RandomStringUtils.randomAlphabetic(6);
+  public String id = null;
   public String parentId = null;
   @NotNull
   public String name = null;
   public String description = null;
-  @NotNull
   public Integer rank = null;
 
   public String getId() {

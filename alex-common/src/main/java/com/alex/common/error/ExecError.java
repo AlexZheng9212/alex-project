@@ -1,4 +1,4 @@
-package com.alex.blog.api.error;
+package com.alex.common.error;
 
 public enum ExecError {
   INVALID,

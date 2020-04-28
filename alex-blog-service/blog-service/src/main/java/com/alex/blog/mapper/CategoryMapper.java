@@ -11,6 +11,6 @@ import org.apache.ibatis.annotations.Param;
 public interface CategoryMapper {
   Integer create(@Param("category") Category category);
   Integer update(@Param("id") String id, @Param("name") String name);
-  List<Category> listByRequest(Integer rank);
-  Category findById(Integer id);
+  List<Category> listByRequest(@Param("category") Category category);
+  Category findById(String id);
 }

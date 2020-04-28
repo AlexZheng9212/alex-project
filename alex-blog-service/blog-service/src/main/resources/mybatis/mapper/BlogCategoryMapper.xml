@@ -4,13 +4,28 @@
 <mapper namespace="com.alex.blog.mapper.CategoryMapper">
 <sql id="categoryColumns">
 id,
-parentId,
+parent_id,
 name,
 rank,
 description
 </sql>
+
+<sql id="findByCondition">
+<where>
+<if test="category.id != null">
+id = #{category.id}
+</if>
+<if test="category.rank != null">
+rank = #{category.rank}
+</if>
+<if test="category.parentId != null">
+parent_id = #{category.parentId}
+</if>
+</where>
+</sql>
+
 <insert id="create">
-INSERT INTO blog_category(<include refid="categoryColumns"/>)
+INSERT INTO blog_category(<include refid="categoryColumns"/>, created_at,updated_at)
 VALUES (
   #{category.id},#{category.parentId},#{category.name},#{category.rank},#{category.description},now(),now()
 )
@@ -20,14 +35,19 @@ VALUES (
 UPDATE blog_category 
 <set>
 name = #{name},
-updatedAt = now()
+updated_at = now()
 </set>
 WHERE id = #{id}
 </update>
 
-<select id="findById">
+<select id="findById" resultType="Category">
 SELECT <include refid="categoryColumns"/> FROM blog_category
 WHERE id = #{id}
+</select>
+
+<select id="listByRequest" resultType="Category">
+SELECT <include refid="categoryColumns"/> FROM blog_category
+<include refid="findByCondition" />
 </select>
 
 </mapper>
