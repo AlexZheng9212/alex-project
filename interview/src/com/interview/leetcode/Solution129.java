@@ -1,3 +1,5 @@
+package com.interview.leetcode;
+
 import com.interview.leetcode.datastruct.TreeNode;
 
 class Solution129 {

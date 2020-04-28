@@ -1,3 +1,5 @@
+package com.interview.leetcode;
+
 import java.util.*;
 
 class Solution54 {
