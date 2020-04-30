@@ -1,4 +1,4 @@
-package com.alex.blog.api.domain;
+package com.alex.blog.api.constant;
 
 public enum Tag {
   // Tech
