@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alex.blog.mapper.ArticleMapper">
+<sql id="articleColumns">
+id,
+title,
+content,
+category,
+author,
+tags,
+created_at,
+updated_at
+</sql>
+
+<sql id="findByCondition">
+<where>
+<if test="article.id != null">
+id = #{article.id}
+</if>
+<if test="article.title != null">
+AND rank = #{article.title}
+</if>
+<if test="article.category != null">
+AND category = #{article.category}
+</if>
+<if test="article.author != null">
+AND author = #{article.author}
+</if>
+</where>
+</sql>
+
+<insert id="create">
+INSERT INTO blog_article(<include refid="categoryColumns"/>)
+VALUES (
+  #{article.id},#{article.title},#{article.content},#{article.category},#{article.author},#{article.tags},now(),now()
+)
+</insert>
+
+<update id="update">
+UPDATE blog_article 
+<set>
+<if test="article.title != null">
+title = #{article.title},
+</if>
+<if test="article.content != null">
+content = #{article.content},
+</if>
+<if test="article.tags != null">
+content = #{article.tags},
+</if>
+updated_at = now()
+</set>
+WHERE id = #{article.id}
+</update>
+
+<select id="listByRequest" resultType="Article">
+SELECT <include refid="articleColumns"/> FROM blog_article
+<include refid="findByCondition" />
+</select>
+
+</mapper>

@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: "org.postgresql.Driver"
+    url: "jdbc:postgresql://localhost:5432/blogservice"
+    username: "postgres"
+    password: "postgres"
+  flyway:
+    locations:
+    - "classpath:/db/migration"
+    baseline-on-migrate: true
+    out-of-order: true
+mybatis:
+  mapper-locations:
+  - "classpath:/mybatis/mapper/*.xml"
+  config-location: "classpath:/mybatis/mapper-config.xml"
