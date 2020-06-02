@@ -1,5 +1,7 @@
 package com.interview.leetcode;
 
+import java.util.HashSet;
+
 /**
  * 分治思想，找锚点：int divide() div左边均小于div，右边均大于div，当 left >= right时候 确定锚点。然后递归。
  */
@@ -41,6 +43,8 @@ public class QuickSort {
   }
 
   public static void main(String[] args) {
+    HashSet<String> hs = new HashSet<>();
+    hs.add("Ssss");
     QuickSort qs = new QuickSort();
     int[] nums = { 9, 3, 2, 1, 4, 5, 6, 7 };
     qs.sort(nums);
