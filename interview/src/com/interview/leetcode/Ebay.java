@@ -1,90 +1,140 @@
 package com.interview.leetcode;
 
-import java.util.HashMap;
-
 import com.interview.leetcode.datastruct.ListNode;
 
 public class Ebay {
-  HashMap<Integer, Integer> hashmap = new HashMap<>();
+  ListNode pos = null;
+  ListNode joint = null;
 
-  public boolean icCirle(ListNode head) {
+  public boolean hasCycle(ListNode head) {
     ListNode slow = head;
-    ListNode fast = head.next;
-    while (slow != null && fast != null) {
-      if (!hashmap.containsKey(slow.val)) {
-        hashmap.put(slow.val, 1);
-      }
-      int count = hashmap.get(slow.val);
-      hashmap.put(slow.val, count + 1);
-      if (slow.val == fast.val) {
-        int max = 0;
-        int location = 0;
-        for (int it : hashmap.keySet()) {
-          int temp = hashmap.get(it);
-          if (temp > max) {
-            location = it;
-            max = temp;
-          }
-        }
-        System.out.println(location);
-        return true;
-      }
+    ListNode fast = head;
+    while (slow != null && fast.next != null) {
       slow = slow.next;
       fast = fast.next.next;
+      if (slow == fast) {
+        return true;
+      }
     }
     return false;
   }
 
-  public String sum(ListNode node1, ListNode node2) {
-    if (node1 == null) {
-      return node2.toString();
+  public ListNode position(ListNode head) {
+    ListNode slow = head;
+    ListNode fast = head;
+    while (slow != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+      if (slow == fast) {
+        pos = slow;
+      }
     }
-    if (node2 == null) {
-      return node1.toString();
+    ListNode node = head;
+    while (pos != null && node != null) {
+      pos = pos.next;
+      node = node.next;
+      if (pos == node) {
+        joint = node;
+        return joint;
+      }
     }
-    StringBuilder sb1 = new StringBuilder();
-    StringBuilder sb2 = new StringBuilder();
+    return null;
+  }
+
+  public int calCycleLen(ListNode head) {
+    ListNode slow = head;
+    ListNode fast = head;
+    while (slow != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+      if (slow == fast) {
+        pos = slow;
+      }
+    }
+    slow = pos.next;
+    fast = pos.next.next;
+    int count = 1;
+    while (slow != null && fast != null) {
+      if (slow == fast) {
+        return count;
+      }
+      fast = fast.next.next;
+      slow = slow.next;
+      count++;
+    }
+    return 0;
+  }
+
+  public int lenOfListNode(ListNode head) {
+    int beforeJoint = 1;
+    for (ListNode node = head; node != joint; node = node.next) {
+      beforeJoint++;
+    }
+    return beforeJoint + calCycleLen(head);
+  }
+
+  public void sum(ListNode node1, ListNode node2) {
+    StringBuilder snode1 = new StringBuilder();
+    StringBuilder snode2 = new StringBuilder();
     while (node1 != null) {
-      sb1.append(node1.val);
+      snode1.append(node1.val);
       node1 = node1.next;
     }
     while (node2 != null) {
-      sb2.append(node2.val);
+      snode2.append(node2.val);
       node2 = node2.next;
     }
-    sb1.reverse();
-    sb2.reverse();
-    int sb1Len = 0;
-    int sb2Len = 0;
+    snode1.reverse();
+    snode2.reverse();
+    int snode1Len = 0;
+    int snode2Len = 0;
     int add = 0;
     StringBuilder res = new StringBuilder();
-    while (sb1Len++ < sb1.length() && sb2Len++ < sb2.length()) {
-      int temp = Integer.valueOf(sb1.charAt(sb1Len)) + Integer.valueOf(sb2.charAt(sb2Len));
-      System.out.println(temp);
+    while (snode1Len < snode1.length() || snode2Len < snode2.length()) {
+      int node1val = 0;
+      int node2val = 0;
+      if (snode2Len < snode2.length()) {
+        node2val = Character.getNumericValue(snode2.charAt(snode2Len));
+      }
+      if (snode1Len < snode1.length()) {
+        node1val = Character.getNumericValue(snode1.charAt(snode1Len));
+      }
+      int temp = node1val + node2val;
       if (add > 0) {
-        temp = temp + add;
+        temp += add;
         add--;
       }
-      if (temp / 10 >= 1) {
+      if (temp / 10 > 0) {
+        add = temp / 10;
         temp = temp % 10;
-        add = 1;
       }
       res.append(temp);
+      snode1Len++;
+      snode2Len++;
     }
-
-    return res.reverse().toString();
+    ListNode ans = new ListNode(-1);
+    ListNode ppp = ans;
+    for (char it : res.reverse().toString().toCharArray()) {
+      ListNode temp = new ListNode(Character.getNumericValue(it));
+      ans.next = temp;
+      ans = temp;
+    }
+    System.out.println(ppp.next.toString());
   }
 
   public static void main(String[] args) {
-    ListNode node1 = new ListNode(1);
-    ListNode node2 = new ListNode(4);
-    ListNode cur4 = new ListNode(5);
-    ListNode cur5 = new ListNode(6);
+    ListNode node11 = new ListNode(1);
+    ListNode node12 = new ListNode(2);
+    ListNode node13 = new ListNode(3);
+    node11.next = node12;
+    node12.next = node13;
 
-    node2.next = cur4;
-    cur4.next = cur5;
+    ListNode node21 = new ListNode(7);
+    ListNode node22 = new ListNode(7);
+    node21.next = node22;
 
-    Ebay s = new Ebay();
-    System.out.println(s.sum(node1, node2));
+    Ebay ebay = new Ebay();
+    ebay.sum(node11, node21);
+
   }
 }
