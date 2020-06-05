@@ -76,6 +76,9 @@ public class Ebay {
     return beforeJoint + calCycleLen(head);
   }
 
+  /**
+   * 1->2->3 + 1->2->4 = 2->4->7 非最优解
+   */
   public void sum(ListNode node1, ListNode node2) {
     StringBuilder snode1 = new StringBuilder();
     StringBuilder snode2 = new StringBuilder();
@@ -125,10 +128,56 @@ public class Ebay {
     System.out.println(ppp.next.toString());
   }
 
+  /**
+   * leetcode 92变形， 需要进行翻转链表。 leetcode 445;
+   */
+  public ListNode sumV2(ListNode node1, ListNode node2) {
+    // reverse
+    ListNode pre1 = null;
+    while (node1 != null) {
+      ListNode temp = node1.next;
+      node1.next = pre1;
+      pre1 = node1;
+      node1 = temp;
+    }
+    ListNode pre2 = null;
+    while (node2 != null) {
+      ListNode temp = node2.next;
+      node2.next = pre2;
+      pre2 = node2;
+      node2 = temp;
+    }
+    int carry = 0;
+    ListNode res = null;
+    while (pre1 != null || pre2 != null || carry > 0) {
+      int a = pre1 != null ? pre1.val : 0;
+      int b = pre2 != null ? pre2.val : 0;
+      int sum = a + b + carry;
+      ListNode temp = new ListNode(sum % 10);
+      carry = sum / 10;
+      temp.next = res;
+      res = temp;
+      pre1 = pre1 != null ? pre1.next : pre1;
+      pre2 = pre2 != null ? pre2.next : pre2;
+    }
+    return res;
+  }
+
+  public void reserve(ListNode head) {
+    ListNode prev = null;
+    while (head != null) {
+      ListNode temp = head.next;
+      head.next = prev;
+      prev = head;
+      head = temp;
+    }
+    System.out.println(prev.toString());
+  }
+
   public static void main(String[] args) {
     ListNode node11 = new ListNode(1);
     ListNode node12 = new ListNode(2);
-    ListNode node13 = new ListNode(3);
+    ListNode node13 = new ListNode(4);
     node11.next = node12;
     node12.next = node13;
 
@@ -137,7 +186,12 @@ public class Ebay {
     node21.next = node22;
 
     Ebay ebay = new Ebay();
-    ebay.sum(node11, node21);
+    // ebay.reserve(node11);
+    ListNode l1 = new ListNode(5);
+    ListNode l2 = new ListNode(5);
+
+    ListNode res = ebay.sumV2(node11, node21);
+    System.out.println(res.toString());
 
   }
 }
