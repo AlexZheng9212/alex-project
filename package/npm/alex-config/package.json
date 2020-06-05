@@ -1,0 +1,12 @@
+{
+  "name": "@alex-airwallex/alex-config",
+  "version": "0.0.1",
+  "description": "alex nodejs config",
+  "repository": "git://git@github.com/alex-airwallex/alex-project.git",
+  "author": "Alex Zheng",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.1.0",
+    "@typescript-eslint/parser": "^3.1.0",
+    "eslint": "^7.1.0"
+  }
+}

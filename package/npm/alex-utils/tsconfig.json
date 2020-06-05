@@ -1,0 +1,8 @@
+{
+  "extends": "./node_modules/@alex-airwallex/alex-config/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "baseUrl": "./"
+  },
+  "exclude": ["node_modules", "test", "coverage", "dist", "fixtures"]
+}
