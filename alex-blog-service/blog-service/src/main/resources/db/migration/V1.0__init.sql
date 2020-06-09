@@ -34,8 +34,8 @@ CREATE INDEX blog_category_rank
 ON blog_category(rank);
 
 
-CREATE TABLE blog_article
-(
-  id UUID PRIMARY KEY,
-  title
-);
+-- CREATE TABLE blog_article
+-- (
+--   id UUID PRIMARY KEY,
+--   title
+-- );

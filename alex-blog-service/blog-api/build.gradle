@@ -26,6 +26,8 @@ dependencies {
     implementation(project(":alex-common"))
 
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.14'
+
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }

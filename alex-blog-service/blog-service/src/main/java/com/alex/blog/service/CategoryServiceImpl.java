@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
   private CategoryMapper categoryMapper;
 
   @Override
-  public Either<ExecFailure,CategoryPageResult> listByRequest(Category category) {
+  public Either<ExecFailure, CategoryPageResult> listByRequest(Category category) {
     try {
       List<Category> categorys = categoryMapper.listByRequest(category);
       CategoryPageResult categoryPageResult = new CategoryPageResult();
@@ -36,38 +36,28 @@ public class CategoryServiceImpl implements CategoryService {
   }
 
   @Override
-  public Either<ExecFailure,Category> create(Category category) {
+  public Either<ExecFailure, Category> create(Category category) {
     try {
-      if(!category.parentId.isEmpty()){
-        Category res = categoryMapper.findById(category.parentId);
-        if(res == null){
-          return Either.left(ExecFailure.fail("category", "fail to create category, parentId is not exist"));
-        }
-        category.rank = res.rank + 1;
-      } else {
-        category.rank = 0;
-      }
       categoryMapper.create(category);
       return Either.right(category);
     } catch (Exception e) {
       LOGGER.error(e.toString());
       return Either.left(ExecFailure.fail("category", "fail to create category"));
     }
-  
+
   }
 
   @Override
-  public Either<ExecFailure,Category> update(Category category) {
+  public Either<ExecFailure, Category> update(Category category) {
     try {
       Integer res = categoryMapper.update(category.id, category.name);
-      LOGGER.info(res.toString());
-      if(res < 1){
+      if (res < 1) {
         return Either.left(ExecFailure.fail("Id is not Exist"));
       }
       return Either.right(category);
     } catch (Exception e) {
-    LOGGER.error(e.toString());
-    return Either.left(ExecFailure.fail("fail to update category"));
+      LOGGER.error(e.toString());
+      return Either.left(ExecFailure.fail("fail to update category"));
     }
   }
 
@@ -77,8 +67,8 @@ public class CategoryServiceImpl implements CategoryService {
       Category category = categoryMapper.findById(id);
       return Either.right(category);
     } catch (Exception e) {
-    LOGGER.error(e.toString());
-    return Either.left(ExecFailure.fail("fail to update category"));
+      LOGGER.error(e.toString());
+      return Either.left(ExecFailure.fail("fail to update category"));
     }
   }
 }

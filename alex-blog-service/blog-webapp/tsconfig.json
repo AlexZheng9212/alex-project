@@ -1,0 +1,18 @@
+{
+  "extends": "./node_modules/@alex-airwallex/alex-config/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "exclude": ["node_modules", "test", "coverage", "dist", "fixtures"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+}

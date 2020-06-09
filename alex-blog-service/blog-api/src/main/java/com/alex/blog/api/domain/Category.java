@@ -4,7 +4,6 @@ import javax.validation.constraints.NotNull;
 
 public class Category {
   public String id = null;
-  public String parentId = null;
   @NotNull
   public String name = null;
   public String description = null;
@@ -20,14 +19,6 @@ public class Category {
 
   public String getName() {
     return name;
-  }
-
-  public String getParentId() {
-    return parentId;
-  }
-
-  public void setParentId(String parentId) {
-    this.parentId = parentId;
   }
 
   public void setName(String name) {

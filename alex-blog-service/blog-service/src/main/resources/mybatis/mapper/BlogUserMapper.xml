@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alex.blog.mapper.UserMapper">
+<sql id="userColumns">
+id,
+email,
+password,
+role,
+created_at,
+updated_at
+</sql>
+
+<insert id="create">
+INSERT INTO blog_user(<include refid="userColumns"/>)
+VALUES (
+  #{user.id},#{user.email},#{user.password},#{user.role},now(),now()
+)
+</insert>
+
+<update id="update">
+UPDATE blog_user 
+<set>
+<if test="user.role != null">
+role = #{user.role},
+</if>
+<if test="user.password != null">
+password = #{user.password},
+</if>
+updated_at = now()
+</set>
+WHERE id = #{user.id}
+</update>
+
+<select id="findById" resultType="User">
+SELECT <include refid="userColumns"/> FROM blog_user
+<where>
+id = #{id}
+</where>
+</select>
+
+</mapper>
