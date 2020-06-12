@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 8081
 spring:
   datasource:
     driver-class-name: "org.postgresql.Driver"
-    url: "jdbc:postgresql://localhost:5432/blogservice"
+    url: "jdbc:postgresql://localhost:5433/blogservice"
     username: "postgres"
     password: "postgres"
   flyway:
@@ -11,7 +11,24 @@ spring:
     - "classpath:/db/migration"
     baseline-on-migrate: true
     out-of-order: true
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: rabbitmq
+    password: A12345!
 mybatis:
   mapper-locations:
   - "classpath:/mybatis/mapper/*.xml"
   config-location: "classpath:/mybatis/mapper-config.xml"
+
+application: 
+  rabbitConnection: 
+    addresses: ["127.0.0.1"]
+    port: 5672
+    username: rabbitmq
+    password: A12345!
+    virtualhost: vhost
+    heartbeat: 60
+    reTrySeconds: 5
+  env: dev
+    
