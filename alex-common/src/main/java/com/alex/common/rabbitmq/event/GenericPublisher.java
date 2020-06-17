@@ -1,10 +1,54 @@
 package com.alex.common.rabbitmq.event;
 
+import com.alex.common.lang.Codecs;
+import com.alex.common.rabbitmq.connection.RabbitChannelPool;
+import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 
-public class GenericPublisher<T> {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-  public GenericPublisher(Connection connection) {
-    
+public class GenericPublisher<T> {
+  private RabbitChannelPool channelPool;
+  private String exchange;
+  private boolean verboseLogging;
+
+  private final static Logger LOGGER = LoggerFactory.getLogger(GenericPublisher.class);
+
+  public GenericPublisher(Connection connection, String exchange) {
+    this(connection, exchange, true);
+    System.out.println("generic: " + connection.toString());
+  }
+
+  public GenericPublisher(Connection connection, String exchange, boolean verboseLogging) {
+    this.channelPool = new RabbitChannelPool(connection);
+    this.exchange = exchange;
+    this.verboseLogging = verboseLogging;
+
+  }
+
+  public void publishEvent(String routingKey, T eventObj) {
+    Channel channel = null;
+    try {
+      String caller = Thread.currentThread().getStackTrace()[3].toString();
+      channel = channelPool.borrowObject();
+      byte[] body = Codecs.objToJsonBytes(eventObj);
+      System.out.println(eventObj.toString());
+      for (byte b : body) {
+        System.out.println(b);
+      }
+      System.out.println("body is: " + new String(body));
+      channel.basicPublish(exchange, routingKey, null, body);
+      if (verboseLogging) {
+        LOGGER.info("Event published by {}, exchange: {}, routingKey: {}, \n body: {}", caller, exchange, routingKey,
+            new String(body));
+      }
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    } finally {
+      if (channel != null)
+        channelPool.returnObject(channel);
+    }
+
   }
 }
