@@ -30,5 +30,7 @@ application:
     virtualhost: vhost
     heartbeat: 60
     reTrySeconds: 5
+  redisConnection:
+    singleServerAddress: "redis://127.0.0.1:6379"
   env: dev
     

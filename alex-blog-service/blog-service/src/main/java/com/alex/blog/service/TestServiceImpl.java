@@ -1,6 +1,7 @@
 package com.alex.blog.service;
 
-import com.alex.blog.config.ApiProperties;
+import com.alex.blog.temp.TestMsg;
+import com.alex.common.rabbitmq.event.GenericPublisher;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,19 +13,17 @@ import org.springframework.stereotype.Service;
 public class TestServiceImpl {
   private final Logger LOGGER = LoggerFactory.getLogger(TestServiceImpl.class);
 
+  private final static String DEFAULT_EXCHANGE = "TEST_EXCHANGE";
+
   @Autowired
-  private ApiProperties apiProperties;
+  private GenericPublisher<Object> testPublisher;
 
   @Async("publisherThreadPool")
-  public void testFunction1() {
-    LOGGER.info(apiProperties.getRabbitConnection().getVirtualhost());
-    LOGGER.info(apiProperties.getRabbitConnection().getAddresses().get(0));
-    
-    LOGGER.info("testing 1 thread pool");
-  }
-
-  @Async("publisherThreadPool")
-  public void testFunction2() {
-    LOGGER.info("testing 2 thread pool");
+  public void sendMsg() {
+    try {
+      testPublisher.publishEvent(DEFAULT_EXCHANGE, new TestMsg());
+    } catch (Exception e) {
+      LOGGER.error("publish event failed. error stack: \n {}", e.toString());
+    }
   }
 }

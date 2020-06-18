@@ -33,15 +33,10 @@ public class GenericPublisher<T> {
       String caller = Thread.currentThread().getStackTrace()[3].toString();
       channel = channelPool.borrowObject();
       byte[] body = Codecs.objToJsonBytes(eventObj);
-      System.out.println(eventObj.toString());
-      for (byte b : body) {
-        System.out.println(b);
-      }
-      System.out.println("body is: " + new String(body));
       channel.basicPublish(exchange, routingKey, null, body);
       if (verboseLogging) {
         LOGGER.info("Event published by {}, exchange: {}, routingKey: {}, \n body: {}", caller, exchange, routingKey,
-            new String(body));
+            eventObj.toString());
       }
     } catch (Exception e) {
       throw new RuntimeException(e);

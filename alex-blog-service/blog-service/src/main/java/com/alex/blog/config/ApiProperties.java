@@ -3,19 +3,18 @@ package com.alex.blog.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import com.alex.common.rabbitmq.connection.RabbitConnectionProperties;
+import com.alex.common.redis.connection.RedisConnectionProperties;
 
 @Configuration
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = true)
+@Data
 public class ApiProperties {
-  @Setter
-  @Getter
+  private RedisConnectionProperties redisConnection = new RedisConnectionProperties();
+
   private RabbitConnectionProperties rabbitConnection = new RabbitConnectionProperties();
 
-  @Setter
-  @Getter
   private String env;
 }
