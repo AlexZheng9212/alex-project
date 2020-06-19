@@ -1,7 +1,7 @@
 package com.alex.blog.temp;
 
 public class TestMsg {
-  String msg = "test msg is hello world";
+  String msg;
 
   @Override
   public String toString() {
