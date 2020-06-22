@@ -7,8 +7,10 @@ import com.alex.common.db.entity.BaseEntity;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity {
   @NotNull
   public Role role;
