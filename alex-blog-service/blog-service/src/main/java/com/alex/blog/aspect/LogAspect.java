@@ -30,7 +30,7 @@ public class LogAspect {
   }
 
   @Around("restLog()")
-  public Object doAround(JoinPoint point) throws Throwable {
+  public Object doAround(ProceedingJoinPoint point) throws Throwable {
     LOGGER.info("Request Log Start...");
     ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
     HttpServletRequest request = (HttpServletRequest) requestAttributes
@@ -38,13 +38,10 @@ public class LogAspect {
     LOGGER.info(request.getProtocol());
     LOGGER.info(request.getMethod() + " " + request.getRequestURI());
     if (request.getMethod().equalsIgnoreCase(RequestMethod.POST.toString())) {
-      for (Object o : point.getArgs()) {
-        LOGGER.info(o.toString());
-      }
-      // LOGGER.info("Request Body: {}", JSONUtil.toJsonStr(point.getArgs()));
+      LOGGER.info("Request Body: {}", JSONUtil.toJsonStr(point.getArgs()));
     }
-    // Object proceed = point.proceed();
+    Object proceed = point.proceed();
     LOGGER.info("Request Log Finish...");
-    return null;
+    return proceed;
   }
 }

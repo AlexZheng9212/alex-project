@@ -1,10 +1,14 @@
 package com.alex.blog.temp;
 
+import lombok.Data;
+
+@Data
 public class TestMsg {
-  String msg;
+  public String msg;
+  public int number;
 
   @Override
   public String toString() {
-    return this.msg;
+    return this.msg + this.number;
   }
 }
