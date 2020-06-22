@@ -35,7 +35,7 @@ public class ArticleResource {
   }
 
   @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Object> listByRequest(@RequestParam(required = false) String id,
+  public ResponseEntity<Object> listByRequest(@RequestParam(required = false, defaultValue = "") String id,
       @RequestParam(required = false) String title, @RequestParam(required = false) String category,
       @RequestParam(required = false) String author, @RequestParam(required = false, defaultValue = "0") Integer skip,
       @RequestParam(required = false, defaultValue = "20") Integer limit) {

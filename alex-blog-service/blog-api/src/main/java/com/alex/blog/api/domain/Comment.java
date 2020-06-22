@@ -6,6 +6,9 @@ import javax.validation.constraints.NotNull;
 
 import com.alex.common.db.entity.BaseEntity;
 
+import lombok.Data;
+
+@Data
 public class Comment extends BaseEntity {
   @NotNull
   public UUID articleId;
