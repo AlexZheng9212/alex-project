@@ -8,7 +8,6 @@ title,
 content,
 category,
 author,
-tags,
 created_at,
 updated_at
 </sql>
@@ -31,9 +30,9 @@ AND author = #{article.author}
 </sql>
 
 <insert id="create">
-INSERT INTO blog_article(<include refid="categoryColumns"/>)
+INSERT INTO blog_article(<include refid="articleColumns"/>)
 VALUES (
-  #{article.id},#{article.title},#{article.content},#{article.category},#{article.author},#{article.tags},now(),now()
+  #{article.id},#{article.title},#{article.content},#{article.category},#{article.author},now(),now()
 )
 </insert>
 
@@ -45,9 +44,6 @@ title = #{article.title},
 </if>
 <if test="article.content != null">
 content = #{article.content},
-</if>
-<if test="article.tags != null">
-content = #{article.tags},
 </if>
 updated_at = now()
 </set>

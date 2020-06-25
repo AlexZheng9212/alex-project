@@ -1,9 +1,9 @@
 import GlobalHeader from '../components/GlobalHeader'
+import navs from '../fixture/nav.json'
 
 const HomePage = ({}) => (
-  <div data-test="hook">
-    <GlobalHeader />
-    <h1>HomePage</h1>
+  <div>
+    <GlobalHeader navs={navs} />
   </div>
 )
 

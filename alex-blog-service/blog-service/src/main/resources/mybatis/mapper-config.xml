@@ -9,5 +9,7 @@
     <typeAliases>
         <typeAlias alias="Category" type="com.alex.blog.api.domain.Category"/>
         <typeAlias alias="Article" type="com.alex.blog.api.domain.Article"/>
+        <typeAlias alias="User" type="com.alex.blog.api.domain.User"/>
+
     </typeAliases>
 </configuration>

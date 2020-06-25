@@ -1,0 +1,23 @@
+version: '3'
+services:
+  redis:
+    image: redis:4
+    ports:
+      - 6379:6379
+  pg10:
+    image: postgres:10
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=blogservice
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=A12345!
+      - RABBITMQ_DEFAULT_VHOST=vhost

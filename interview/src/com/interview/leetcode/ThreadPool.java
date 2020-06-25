@@ -74,6 +74,7 @@ class Task implements Runnable {
   public void run() {
     try {
       Thread.sleep(500);
+      System.out.println("666");
     } catch (InterruptedException e) {
       e.printStackTrace();
     }

@@ -34,8 +34,13 @@ CREATE INDEX blog_category_rank
 ON blog_category(rank);
 
 
--- CREATE TABLE blog_article
--- (
---   id UUID PRIMARY KEY,
---   title
--- );
+CREATE TABLE blog_article
+(
+  id UUID PRIMARY KEY,
+  title VARCHAR(30) NOT NULL,
+  content TEXT,
+  category VARCHAR(30),
+  author VARCHAR(20),
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL
+);
