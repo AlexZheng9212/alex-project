@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.alex.blog.mapper.UserMapper">
+<cache readOnly="true" blocking="true" flushInterval="60000" />
 <sql id="userColumns">
 id,
 email,
@@ -14,7 +15,7 @@ updated_at
 <insert id="create">
 INSERT INTO blog_user(<include refid="userColumns"/>)
 VALUES (
-  #{user.id},#{user.email},#{user.password},#{user.role},now(),now()
+  #{user.id}::uuid,#{user.email},#{user.password},#{user.role},now(),now()
 )
 </insert>
 
@@ -29,7 +30,7 @@ password = #{user.password},
 </if>
 updated_at = now()
 </set>
-WHERE id = #{user.id}
+WHERE id = #{user.id}::uuid
 </update>
 
 <select id="findById" resultType="User">

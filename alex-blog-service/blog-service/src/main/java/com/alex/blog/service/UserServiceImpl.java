@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public Either<ExecFailure, User> create(User user) {
     try {
-      user.id = UUID.randomUUID();
+      user.id = UUID.randomUUID().toString();
       userMapper.create(user);
       return Either.right(user);
     } catch (Exception e) {

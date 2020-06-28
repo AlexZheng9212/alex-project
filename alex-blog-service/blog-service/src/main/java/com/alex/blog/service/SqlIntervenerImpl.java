@@ -20,7 +20,7 @@ public class SqlIntervenerImpl extends AbstractSqlIntervener {
         String invokeResult = (String) method.invoke(inputParam);
         List<String> regionList = new ArrayList<>(Splitter.on(",").splitToList(invokeResult.toString()));
         // java 反射修改属性值
-        regionList.add("test");
+        // regionList.add("test");
         Field f = inputParam.getClass().getDeclaredField("category");
         f.setAccessible(true);
         f.set(inputParam, regionList.toString());
