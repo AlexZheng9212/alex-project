@@ -1,7 +1,5 @@
 package com.alex.blog.api.domain;
 
-import java.util.UUID;
-
 import javax.validation.constraints.NotNull;
 
 import com.alex.common.db.entity.BaseEntity;
@@ -26,7 +24,7 @@ public class Article extends BaseEntity {
   }
 
   public Article(String id, String title, String category, String author) {
-    this.id = UUID.fromString(id);
+    this.id = id;
     this.title = title;
     this.category = category;
     this.author = author;

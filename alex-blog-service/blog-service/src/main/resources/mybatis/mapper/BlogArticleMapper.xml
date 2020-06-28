@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.alex.blog.mapper.ArticleMapper">
+
 <sql id="articleColumns">
 id,
 title,
@@ -15,7 +16,7 @@ updated_at
 <sql id="findByCondition">
 <where>
 <if test="article.id != null">
-id = #{article.id}
+id = #{article.id}::uuid
 </if>
 <if test="article.title != null">
 AND rank = #{article.title}
@@ -27,12 +28,14 @@ AND category = #{article.category}
 AND author = #{article.author}
 </if>
 </where>
+limit #{limit}
+offset #{offset}
 </sql>
 
 <insert id="create">
 INSERT INTO blog_article(<include refid="articleColumns"/>)
 VALUES (
-  #{article.id},#{article.title},#{article.content},#{article.category},#{article.author},now(),now()
+  #{article.id}::uuid,#{article.title},#{article.content},#{article.category},#{article.author},now(),now()
 )
 </insert>
 
@@ -51,7 +54,7 @@ WHERE id = #{article.id}
 </update>
 
 <select id="listByRequest" resultType="Article">
-SELECT <include refid="articleColumns"/> FROM blog_article
+SELECT <include refid="articleColumns" /> FROM blog_article
 <include refid="findByCondition" />
 </select>
 

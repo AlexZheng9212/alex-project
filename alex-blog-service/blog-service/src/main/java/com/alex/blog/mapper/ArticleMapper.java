@@ -12,8 +12,8 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ArticleMapper {
-  @SqlIntervener()
-  List<Article> listByRequest(@Param("article") Article article, Integer offset, Integer limit);
+  List<Article> listByRequest(@Param("article") Article article, @Param("offset") Integer offset,
+      @Param("limit") Integer limit);
 
   @MybatisIntercept
   Article findById(@Param("id") UUID id);

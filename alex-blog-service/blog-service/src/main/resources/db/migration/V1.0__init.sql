@@ -38,9 +38,30 @@ CREATE TABLE blog_article
 (
   id UUID PRIMARY KEY,
   title VARCHAR(30) NOT NULL,
-  content TEXT,
-  category VARCHAR(30),
-  author VARCHAR(20),
+  content TEXT NOT NULL,
+  category VARCHAR(40) NOT NULL,
+  author VARCHAR(40) NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL
 );
+
+CREATE UNIQUE INDEX blog_article_id
+ON blog_article(id);
+CREATE UNIQUE INDEX blog_article_title
+ON blog_article(title);
+
+CREATE TABLE blog_article_draft
+(
+  id UUID PRIMARY KEY,
+  title VARCHAR(30) NOT NULL,
+  content TEXT NOT NULL,
+  category VARCHAR(40) NOT NULL,
+  author VARCHAR(40) NOT NULL,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL
+);
+
+CREATE UNIQUE INDEX blog_article_draft_id
+ON blog_article_draft(id);
+CREATE UNIQUE INDEX blog_article_draft_title
+ON blog_article_draft(title);

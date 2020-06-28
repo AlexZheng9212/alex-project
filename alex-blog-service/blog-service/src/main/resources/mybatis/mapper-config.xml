@@ -4,6 +4,7 @@
     <settings>
         <!--下划线风格自动转驼峰风格-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="cacheEnabled" value="true" />
     </settings>
 
     <typeAliases>
