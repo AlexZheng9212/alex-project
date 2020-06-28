@@ -41,7 +41,6 @@ CREATE TABLE blog_article
   content TEXT NOT NULL,
   category VARCHAR(40) NOT NULL,
   author VARCHAR(40) NOT NULL,
-  status VARCHAR(10) NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL
 );

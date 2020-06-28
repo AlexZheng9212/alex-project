@@ -41,7 +41,6 @@ public class CategoryResource {
       @RequestParam(required = false) String parentId, @RequestParam(required = false) Integer rank) {
     Category category = new Category();
     category.setId(id);
-    category.setParentId(parentId);
     category.setRank(rank);
     return RestUtils.eitherBadResponse(categoryService.listByRequest(category));
   }

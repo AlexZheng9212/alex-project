@@ -4,7 +4,6 @@
 <mapper namespace="com.alex.blog.mapper.CategoryMapper">
 <sql id="categoryColumns">
 id,
-parent_id,
 name,
 rank,
 description
@@ -18,16 +17,13 @@ id = #{category.id}
 <if test="category.rank != null">
 rank = #{category.rank}
 </if>
-<if test="category.parentId != null">
-parent_id = #{category.parentId}
-</if>
 </where>
 </sql>
 
 <insert id="create">
 INSERT INTO blog_category(<include refid="categoryColumns"/>, created_at,updated_at)
 VALUES (
-  #{category.id},#{category.parentId},#{category.name},#{category.rank},#{category.description},now(),now()
+  #{category.id},#{category.name},#{category.rank},#{category.description},now(),now()
 )
 </insert>
 

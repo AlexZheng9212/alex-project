@@ -8,3 +8,6 @@ def declareProject(String projectPath, String projectName){
 declareProject("alex-common", "alex-common")
 declareProject("alex-blog-service/blog-api", "alex-blog-api")
 declareProject("alex-blog-service/blog-service", "alex-blog-service")
+declareProject("alex-netty/netty-server", "alex-nettyserver")
+
+

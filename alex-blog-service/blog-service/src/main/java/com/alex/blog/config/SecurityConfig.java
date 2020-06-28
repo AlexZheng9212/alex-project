@@ -15,7 +15,8 @@ public class SecurityConfig {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
       http.csrf().disable().authorizeRequests().antMatchers("/api/categories").permitAll().antMatchers("/api/articles")
-          .permitAll().antMatchers("/health-checker").permitAll().antMatchers("/api/authorization").permitAll();
+          .permitAll().antMatchers("/health-checker").permitAll().antMatchers("/api/authorization").permitAll()
+          .antMatchers("/health-checker").permitAll().antMatchers("/api/test").permitAll();
     }
   }
 }

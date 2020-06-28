@@ -4,10 +4,13 @@
     <settings>
         <!--下划线风格自动转驼峰风格-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="cacheEnabled" value="true" />
     </settings>
 
     <typeAliases>
         <typeAlias alias="Category" type="com.alex.blog.api.domain.Category"/>
         <typeAlias alias="Article" type="com.alex.blog.api.domain.Article"/>
+        <typeAlias alias="User" type="com.alex.blog.api.domain.User"/>
+
     </typeAliases>
 </configuration>

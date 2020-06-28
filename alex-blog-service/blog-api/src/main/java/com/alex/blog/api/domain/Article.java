@@ -1,12 +1,14 @@
 package com.alex.blog.api.domain;
 
-import java.util.UUID;
-
 import javax.validation.constraints.NotNull;
 
-import com.alex.blog.api.constant.ArticleStatus;
 import com.alex.common.db.entity.BaseEntity;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class Article extends BaseEntity {
   @NotNull
   public String title;
@@ -16,17 +18,15 @@ public class Article extends BaseEntity {
   public String category;
   @NotNull
   public String author;
-  @NotNull
-  public ArticleStatus articleStatus;
+  // public List<Tag> tags;
 
   public Article() {
   }
 
-  public Article(String id, String title, String category, String author, ArticleStatus articleStatus) {
-    this.id = UUID.fromString(id);
+  public Article(String id, String title, String category, String author) {
+    this.id = id;
     this.title = title;
     this.category = category;
     this.author = author;
-    this.articleStatus = articleStatus;
   }
 }

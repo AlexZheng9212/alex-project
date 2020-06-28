@@ -1,9 +1,11 @@
 package com.alex.blog.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.alex.blog.api.ArticleService;
 import com.alex.blog.api.domain.Article;
+import com.alex.blog.api.result.*;
 import com.alex.blog.mapper.ArticleMapper;
 import com.alex.common.error.ExecFailure;
 
@@ -23,6 +25,7 @@ public class ArticleServiceImpl implements ArticleService {
   @Override
   public Either<ExecFailure, Integer> create(Article article) {
     try {
+      article.id = UUID.randomUUID().toString();
       Integer res = articleMapper.create(article);
       return Either.right(res);
     } catch (Exception e) {
@@ -46,10 +49,12 @@ public class ArticleServiceImpl implements ArticleService {
   }
 
   @Override
-  public Either<ExecFailure, List<Article>> listByRequest(Article article, Integer offset, Integer limit) {
+  public Either<ExecFailure, ArticlePageResult> listByRequest(Article article, Integer offset, Integer limit) {
     try {
       List<Article> articles = articleMapper.listByRequest(article, offset, limit);
-      return Either.right(articles);
+      ArticlePageResult articlePageResult = new ArticlePageResult();
+      articlePageResult.setData(articles);
+      return Either.right(articlePageResult);
     } catch (Exception e) {
       LOGGER.error(e.toString());
       return Either.left(ExecFailure.fail("Article", "fail to find articles", e.toString()));
