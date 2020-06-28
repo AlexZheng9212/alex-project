@@ -15,8 +15,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import static com.alex.common.utils.UUIDUtils.convertToUUID;
 
 @RestController
 @RequestMapping("/api/articles")
@@ -41,5 +44,10 @@ public class ArticleResource {
       @RequestParam(required = false, defaultValue = "20") Integer limit) {
     Article article = new Article(id, title, category, author);
     return RestUtils.eitherBadResponse(articleService.listByRequest(article, skip, limit));
+  }
+
+  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Object> findById(@PathVariable("id") String id) {
+    return RestUtils.eitherBadResponse(articleService.findById(convertToUUID(id)));
   }
 }

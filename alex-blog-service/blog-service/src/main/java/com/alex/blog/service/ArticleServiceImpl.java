@@ -60,4 +60,15 @@ public class ArticleServiceImpl implements ArticleService {
       return Either.left(ExecFailure.fail("Article", "fail to find articles", e.toString()));
     }
   }
+
+  @Override
+  public Either<ExecFailure, Article> findById(UUID id) {
+    try {
+      Article article = articleMapper.findById(id);
+      return Either.right(article);
+    } catch (Exception e) {
+      LOGGER.error(e.toString());
+      return Either.left(ExecFailure.fail("Article", "fail to find articles", e.toString()));
+    }
+  }
 }

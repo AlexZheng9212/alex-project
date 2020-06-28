@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class Category {
   public String id = null;
+  public String parentId = null;
   @NotNull
   public String name = null;
   public String description = null;

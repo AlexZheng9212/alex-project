@@ -1,6 +1,7 @@
 package com.alex.blog.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.alex.blog.api.UserService;
 import com.alex.blog.api.domain.User;
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public Either<ExecFailure, User> create(User user) {
     try {
+      user.id = UUID.randomUUID();
       userMapper.create(user);
       return Either.right(user);
     } catch (Exception e) {

@@ -1,6 +1,7 @@
 package com.alex.blog.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.alex.blog.api.CategoryService;
 import com.alex.blog.api.domain.Category;
