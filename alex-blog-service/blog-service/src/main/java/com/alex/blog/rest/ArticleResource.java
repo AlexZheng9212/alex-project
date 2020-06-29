@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 import com.alex.blog.api.ArticleService;
+import com.alex.blog.api.constant.ArticleStatus;
 import com.alex.blog.api.domain.Article;
 import com.alex.common.utils.RestUtils;
 
@@ -40,9 +41,10 @@ public class ArticleResource {
   @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Object> listByRequest(@RequestParam(required = false) String id,
       @RequestParam(required = false) String title, @RequestParam(required = false) String category,
-      @RequestParam(required = false) String author, @RequestParam(required = false, defaultValue = "0") Integer skip,
+      @RequestParam(required = false) String author, @RequestParam(required = false) ArticleStatus status,
+      @RequestParam(required = false, defaultValue = "0") Integer skip,
       @RequestParam(required = false, defaultValue = "20") Integer limit) {
-    Article article = new Article(id, title, category, author);
+    Article article = new Article(id, title, category, author, status);
     return RestUtils.eitherBadResponse(articleService.listByRequest(article, skip, limit));
   }
 

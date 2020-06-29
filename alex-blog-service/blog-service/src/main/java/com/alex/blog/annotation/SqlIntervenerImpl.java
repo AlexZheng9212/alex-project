@@ -1,4 +1,4 @@
-package com.alex.blog.service;
+package com.alex.blog.annotation;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SqlIntervenerImpl extends AbstractSqlIntervener {
+  /**
+   * [POC]: just active in Article
+   */
   @Override
   public void doReplace(Object inputParam) {
     if (inputParam.getClass().getName().contains("Article")) {

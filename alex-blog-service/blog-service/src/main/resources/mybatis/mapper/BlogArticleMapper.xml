@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.alex.blog.mapper.ArticleMapper">
-<cache readOnly="true" blocking="true" />
+<cache readOnly="true" blocking="true" flushInterval="60000"/>
 <sql id="articleColumns">
 id,
 title,
 content,
 category,
 author,
+status,
 created_at,
 updated_at
 </sql>
@@ -36,7 +37,7 @@ offset #{offset}
 <insert id="create">
 INSERT INTO blog_article(<include refid="articleColumns"/>)
 VALUES (
-  #{article.id}::uuid,#{article.title},#{article.content},#{article.category},#{article.author},now(),now()
+  #{article.id}::uuid,#{article.title},#{article.content},#{article.category},#{article.author},#{article.status},now(),now()
 )
 </insert>
 
@@ -48,6 +49,9 @@ title = #{article.title},
 </if>
 <if test="article.content != null">
 content = #{article.content},
+</if>
+<if test="article.status != null">
+status = #{article.status},
 </if>
 updated_at = now()
 </set>

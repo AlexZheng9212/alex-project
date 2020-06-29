@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public Either<ExecFailure, User> create(User user) {
     try {
-      user.id = UUID.randomUUID().toString();
+      user.id = UUID.randomUUID();
       userMapper.create(user);
       return Either.right(user);
     } catch (Exception e) {
@@ -63,8 +63,7 @@ public class UserServiceImpl implements UserService {
   public Either<ExecFailure, UserPageResult> findAll() {
     try {
       List<User> users = userMapper.findAll();
-      UserPageResult userPageResult = new UserPageResult();
-      userPageResult.setData(users);
+      UserPageResult userPageResult = new UserPageResult(users);
       return Either.right(userPageResult);
     } catch (Exception e) {
       LOGGER.error(e.toString());

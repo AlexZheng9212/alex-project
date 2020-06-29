@@ -26,8 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
   public Either<ExecFailure, CategoryPageResult> listByRequest(Category category) {
     try {
       List<Category> categorys = categoryMapper.listByRequest(category);
-      CategoryPageResult categoryPageResult = new CategoryPageResult();
-      categoryPageResult.setData(categorys);
+      CategoryPageResult categoryPageResult = new CategoryPageResult(categorys);
       return Either.right(categoryPageResult);
     } catch (Exception e) {
       LOGGER.error(e.toString());
