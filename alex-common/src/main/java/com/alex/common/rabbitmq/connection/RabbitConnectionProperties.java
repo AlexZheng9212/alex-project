@@ -4,41 +4,25 @@ import java.util.List;
 
 import com.rabbitmq.client.Address;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 public class RabbitConnectionProperties {
 
-  @Setter
-  @Getter
   private List<String> addresses;
 
-  @Setter
-  @Getter
   private int port;
 
-  @Setter
-  @Getter
   private String username;
 
-  @Setter
-  @Getter
   private String password;
 
-  @Setter
-  @Getter
   private String virtualhost;
 
-  @Setter
-  @Getter
   private int heartbeat = 60;
 
-  @Setter
-  @Getter
   private int reTrySecords = 5;
 
-  @Setter
-  @Getter
   private int prefetchCount = 100;
 
   public Address[] getHostAddresses() {
