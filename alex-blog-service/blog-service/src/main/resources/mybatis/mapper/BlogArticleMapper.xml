@@ -28,6 +28,9 @@ AND category = #{article.category}
 <if test="article.author != null">
 AND author = #{article.author}
 </if>
+<if test="article.status != null">
+AND status = #{article.status}
+</if>
 </if>
 </where>
 limit #{limit}
