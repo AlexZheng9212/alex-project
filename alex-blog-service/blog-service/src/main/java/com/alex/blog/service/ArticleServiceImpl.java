@@ -25,7 +25,7 @@ public class ArticleServiceImpl implements ArticleService {
   @Override
   public Either<ExecFailure, Integer> create(Article article) {
     try {
-      article.id = UUID.randomUUID().toString();
+      article.id = UUID.randomUUID();
       Integer res = articleMapper.create(article);
       return Either.right(res);
     } catch (Exception e) {
@@ -52,8 +52,7 @@ public class ArticleServiceImpl implements ArticleService {
   public Either<ExecFailure, ArticlePageResult> listByRequest(Article article, Integer offset, Integer limit) {
     try {
       List<Article> articles = articleMapper.listByRequest(article, offset, limit);
-      ArticlePageResult articlePageResult = new ArticlePageResult();
-      articlePageResult.setData(articles);
+      ArticlePageResult articlePageResult = new ArticlePageResult(articles);
       return Either.right(articlePageResult);
     } catch (Exception e) {
       LOGGER.error(e.toString());

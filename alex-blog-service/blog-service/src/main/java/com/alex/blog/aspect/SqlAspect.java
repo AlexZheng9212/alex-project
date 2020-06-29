@@ -1,6 +1,6 @@
 package com.alex.blog.aspect;
 
-import com.alex.blog.service.SqlIntervenerImpl;
+import com.alex.blog.annotation.SqlIntervenerImpl;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;

@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.alex.blog.mapper.CategoryMapper">
+<cache readOnly="true" blocking="true" flushInterval="60000" />
+
 <sql id="categoryColumns">
 id,
 name,

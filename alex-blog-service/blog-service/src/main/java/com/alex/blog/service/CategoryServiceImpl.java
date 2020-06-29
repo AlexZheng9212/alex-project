@@ -1,7 +1,6 @@
 package com.alex.blog.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.alex.blog.api.CategoryService;
 import com.alex.blog.api.domain.Category;
@@ -27,8 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
   public Either<ExecFailure, CategoryPageResult> listByRequest(Category category) {
     try {
       List<Category> categorys = categoryMapper.listByRequest(category);
-      CategoryPageResult categoryPageResult = new CategoryPageResult();
-      categoryPageResult.setData(categorys);
+      CategoryPageResult categoryPageResult = new CategoryPageResult(categorys);
       return Either.right(categoryPageResult);
     } catch (Exception e) {
       LOGGER.error(e.toString());

@@ -1,4 +1,4 @@
-package com.alex.blog.config;
+package com.alex.blog.annotation;
 
 import java.lang.reflect.Method;
 import java.sql.Connection;
