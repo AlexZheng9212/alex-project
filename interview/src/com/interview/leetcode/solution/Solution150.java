@@ -1,4 +1,4 @@
-package com.interview.leetcode;
+package com.interview.leetcode.solution;
 
 import java.util.Stack;
 

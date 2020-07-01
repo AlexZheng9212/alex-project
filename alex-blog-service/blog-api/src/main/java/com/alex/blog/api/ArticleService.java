@@ -1,5 +1,6 @@
 package com.alex.blog.api;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.alex.blog.api.domain.Article;
@@ -16,4 +17,6 @@ public interface ArticleService {
   public Either<ExecFailure, ArticlePageResult> listByRequest(Article article, Integer offset, Integer limit);
 
   public Either<ExecFailure, Article> findById(UUID id);
+
+  public Either<ExecFailure, Integer> bulkCreate(List<Article> articles);
 }
