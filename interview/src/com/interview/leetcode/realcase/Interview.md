@@ -11,3 +11,25 @@
 #### ByteDance
 
 - Meeting Room II: (prime) 时间区间问题：根据 `时间` 排序， 开始会议为正，结束会议为负。取 遇到 正数 room++，负数 room--。取 Max(room)
+
+#### Trips
+
+- 有序数组中找出给出元素首次出现的位置
+- 场景题: mq 的限速问题
+
+```
+| topic | --> onMessage()
+onMessage(Msg msg){
+  ... 添加限速条件
+  callRpcService();  // 一次可查询100条id，一分钟只能call 10次
+}
+```
+
+```
+思路
+1. topic 的速度 正常/快/慢
+2. callRpcService的限制
+3. 在快的时候把速度降下来，在慢的时候保持速率
+4.1 queue -> 在快的时候把速度降下来
+4.2 定时器 -> 当queue不为空时，最多取100个id，每0.1秒请求一次。 -> 慢的时候不影响
+```
