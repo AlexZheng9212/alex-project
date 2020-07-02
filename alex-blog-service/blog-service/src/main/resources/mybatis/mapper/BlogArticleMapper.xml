@@ -71,4 +71,21 @@ SELECT <include refid="articleColumns"/> FROM blog_article
 WHERE id = #{id}
 </select>
 
+<insert id="bulkCreate" parameterType="List">
+INSERT INTO blog_article(<include refid="articleColumns"/>)
+VALUES 
+<foreach collection="articles" item="item" open="" separator="," close="">
+  (
+  UUID(),
+  #{item.title},
+  'bili',
+  #{item.category},
+  #{item.author},
+  #{item.status},
+  now(),
+  now()
+  )
+</foreach>
+</insert>
+
 </mapper>

@@ -24,4 +24,7 @@ public interface ArticleMapper {
   @MybatisIntercept
   Integer update(@Param("article") Article article);
 
+  @MybatisIntercept
+  Integer bulkCreate(@Param("articles") List<Article> articles);
+
 }

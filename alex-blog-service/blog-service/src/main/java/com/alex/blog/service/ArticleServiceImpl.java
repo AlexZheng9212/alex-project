@@ -13,19 +13,38 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import io.vavr.control.Either;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
   private final static Logger LOGGER = LoggerFactory.getLogger(ArticleServiceImpl.class);
+  private final static String path = "/Users/alex.zheng/Documents/";
   @Autowired
   private ArticleMapper articleMapper;
+
+  @Autowired
+  private UploadArticleFileService uploadArticleFileService;
+
+  @Override
+  public Either<ExecFailure, Integer> bulkCreate(MultipartFile multipartFile) {
+    try {
+      List<Article> articles = uploadArticleFileService.transfer(multipartFile);
+      UploadArticleFileService.uploadFile(path, multipartFile);
+      Integer res = articleMapper.bulkCreate(articles);
+      return Either.right(res);
+    } catch (Exception e) {
+      LOGGER.error(e.toString());
+      return Either.left(ExecFailure.fail("fail upload articles"));
+    }
+  }
 
   @Override
   public Either<ExecFailure, Integer> create(Article article) {
     try {
       article.id = UUID.randomUUID();
+      System.out.println(article.toString());
       Integer res = articleMapper.create(article);
       return Either.right(res);
     } catch (Exception e) {

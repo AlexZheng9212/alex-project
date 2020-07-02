@@ -10,7 +10,6 @@ import javax.validation.Valid;
 import com.alex.blog.api.ArticleService;
 import com.alex.blog.api.constant.ArticleStatus;
 import com.alex.blog.api.domain.Article;
-import com.alex.blog.service.UploadFileServiceImpl;
 import com.alex.common.utils.RestUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +31,6 @@ public class ArticleResource {
   @Autowired
   private ArticleService articleService;
 
-  @Autowired
-  private UploadFileServiceImpl uploadFileServiceImpl;
-
   @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Object> create(@Valid @RequestBody Article article) {
     return RestUtils.eitherBadResponse(articleService.create(article));
@@ -43,7 +39,7 @@ public class ArticleResource {
   @PostMapping(value = "/upload", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
   public void uploadArticle(@RequestParam("file") MultipartFile multipartFile)
       throws IllegalStateException, IOException {
-    uploadFileServiceImpl.uploadFile(multipartFile);
+    articleService.bulkCreate(multipartFile);
   }
 
   @PatchMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
