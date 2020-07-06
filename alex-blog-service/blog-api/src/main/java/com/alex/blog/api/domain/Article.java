@@ -7,10 +7,12 @@ import com.alex.common.db.entity.BaseEntity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import static com.alex.common.utils.UUIDUtils.convertToUUID;
 
 @Data
+@ToString
 @EqualsAndHashCode(callSuper = true)
 public class Article extends BaseEntity {
   @NotNull

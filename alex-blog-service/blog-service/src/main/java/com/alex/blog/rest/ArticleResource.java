@@ -3,6 +3,7 @@ package com.alex.blog.rest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import static com.alex.common.utils.UUIDUtils.convertToUUID;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/api/articles")
 public class ArticleResource {
@@ -31,6 +34,12 @@ public class ArticleResource {
   @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Object> create(@Valid @RequestBody Article article) {
     return RestUtils.eitherBadResponse(articleService.create(article));
+  }
+
+  @PostMapping(value = "/upload", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+  public void uploadArticle(@RequestParam("file") MultipartFile multipartFile)
+      throws IllegalStateException, IOException {
+    articleService.bulkCreate(multipartFile);
   }
 
   @PatchMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)

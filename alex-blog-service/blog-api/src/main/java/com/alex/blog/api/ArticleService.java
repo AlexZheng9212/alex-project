@@ -6,6 +6,8 @@ import com.alex.blog.api.domain.Article;
 import com.alex.blog.api.result.ArticlePageResult;
 import com.alex.common.error.ExecFailure;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import io.vavr.control.Either;
 
 public interface ArticleService {
@@ -16,4 +18,6 @@ public interface ArticleService {
   public Either<ExecFailure, ArticlePageResult> listByRequest(Article article, Integer offset, Integer limit);
 
   public Either<ExecFailure, Article> findById(UUID id);
+
+  public Either<ExecFailure, Integer> bulkCreate(MultipartFile multipartFile);
 }

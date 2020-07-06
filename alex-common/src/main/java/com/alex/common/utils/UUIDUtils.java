@@ -9,6 +9,7 @@ public class UUIDUtils {
     try {
       return UUID.fromString(str);
     } catch (IllegalArgumentException e) {
+      e.printStackTrace();
       return null;
     }
   }
