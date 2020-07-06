@@ -55,11 +55,11 @@ public class UploadArticleFileService extends AbstractBasicUploadFileService<Art
         ArticleStatus status = ArticleStatus.valueOf(genCellValue(row.getCell(4)));
         Article article = new Article();
         article.id = UUID.randomUUID();
-        article.setTitle(title);
-        article.setContent("bili");
-        article.setCategory(category);
-        article.setStatus(status);
-        article.setAuthor(author);
+        article.title = title;
+        article.content = "bili";
+        article.category = category;
+        article.status = status;
+        article.author = author;
         System.out.println(article.id + " " + article.toString());
         articles.add(article);
       }

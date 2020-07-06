@@ -14,4 +14,9 @@
         <typeAlias alias="User" type="com.alex.blog.api.domain.User"/>
 
     </typeAliases>
+
+     <typeHandlers>  
+        <typeHandler handler="com.alex.blog.mapper.UUIDTypeHandler"  
+            javaType="java.util.UUID" jdbcType="VARCHAR" />  
+    </typeHandlers>  
 </configuration>

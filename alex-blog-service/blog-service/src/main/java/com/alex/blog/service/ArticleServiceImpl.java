@@ -20,7 +20,7 @@ import io.vavr.control.Either;
 @Service
 public class ArticleServiceImpl implements ArticleService {
   private final static Logger LOGGER = LoggerFactory.getLogger(ArticleServiceImpl.class);
-  private final static String path = "/Users/alex.zheng/Documents/";
+  private final static String path = "/Users/zhengdingqiang/Documents/";
   @Autowired
   private ArticleMapper articleMapper;
 
@@ -31,7 +31,8 @@ public class ArticleServiceImpl implements ArticleService {
   public Either<ExecFailure, Integer> bulkCreate(MultipartFile multipartFile) {
     try {
       List<Article> articles = uploadArticleFileService.transfer(multipartFile);
-      UploadArticleFileService.uploadFile(path, multipartFile);
+      System.out.println("id: " + articles.get(0).id);
+      // UploadArticleFileService.uploadFile(path, multipartFile);
       Integer res = articleMapper.bulkCreate(articles);
       return Either.right(res);
     } catch (Exception e) {
