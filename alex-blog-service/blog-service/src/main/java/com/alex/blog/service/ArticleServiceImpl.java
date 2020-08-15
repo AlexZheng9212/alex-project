@@ -28,16 +28,17 @@ public class ArticleServiceImpl implements ArticleService {
   private UploadArticleFileService uploadArticleFileService;
 
   @Override
-  public Either<ExecFailure, Integer> bulkCreate(MultipartFile multipartFile) {
+  public Either<ExecFailure, ArticlePageResult> bulkCreate(MultipartFile multipartFile) {
     try {
       List<Article> articles = uploadArticleFileService.transfer(multipartFile);
+      ArticlePageResult articlePageResult = new ArticlePageResult(articles);
       System.out.println("id: " + articles.get(0).id);
-      // UploadArticleFileService.uploadFile(path, multipartFile);
-      Integer res = articleMapper.bulkCreate(articles);
-      return Either.right(res);
+      UploadArticleFileService.uploadFile(path, multipartFile);
+      articleMapper.bulkCreate(articles);
+      return Either.right(articlePageResult);
     } catch (Exception e) {
       LOGGER.error(e.toString());
-      return Either.left(ExecFailure.fail("fail upload articles"));
+      return Either.left(ExecFailure.fail("Articles", "fail upload articles", e.toString()));
     }
   }
 
@@ -45,7 +46,6 @@ public class ArticleServiceImpl implements ArticleService {
   public Either<ExecFailure, Integer> create(Article article) {
     try {
       article.id = UUID.randomUUID();
-      System.out.println(article.toString());
       Integer res = articleMapper.create(article);
       return Either.right(res);
     } catch (Exception e) {

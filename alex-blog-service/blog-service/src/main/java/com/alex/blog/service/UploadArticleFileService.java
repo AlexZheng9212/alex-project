@@ -49,18 +49,13 @@ public class UploadArticleFileService extends AbstractBasicUploadFileService<Art
       int totalLines = sheet.getLastRowNum();
       for (int j = totalLines; j > 0; j--) {
         Row row = sheet.getRow(j);
-        String title = genCellValue(row.getCell(1));
-        String category = genCellValue(row.getCell(2));
-        String author = genCellValue(row.getCell(3));
-        ArticleStatus status = ArticleStatus.valueOf(genCellValue(row.getCell(4)));
-        Article article = new Article();
+        String title = genCellValue(row.getCell(0));
+        String category = genCellValue(row.getCell(1));
+        String author = genCellValue(row.getCell(2));
+        ArticleStatus status = ArticleStatus.valueOf(genCellValue(row.getCell(3)));
+        Article article = Article.builder().author(author).status(status).category(category).content("bili")
+            .title(title).build();
         article.id = UUID.randomUUID();
-        article.title = title;
-        article.content = "bili";
-        article.category = category;
-        article.status = status;
-        article.author = author;
-        System.out.println(article.id + " " + article.toString());
         articles.add(article);
       }
     }

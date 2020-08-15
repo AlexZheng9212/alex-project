@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import com.alex.blog.api.constant.ArticleStatus;
 import com.alex.common.db.entity.BaseEntity;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -13,6 +14,7 @@ import static com.alex.common.utils.UUIDUtils.convertToUUID;
 
 @Data
 @ToString
+@Builder
 @EqualsAndHashCode(callSuper = true)
 public class Article extends BaseEntity {
   @NotNull

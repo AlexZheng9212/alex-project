@@ -37,9 +37,9 @@ public class ArticleResource {
   }
 
   @PostMapping(value = "/upload", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-  public void uploadArticle(@RequestParam("file") MultipartFile multipartFile)
+  public ResponseEntity<Object> uploadArticle(@RequestParam("file") MultipartFile multipartFile)
       throws IllegalStateException, IOException {
-    articleService.bulkCreate(multipartFile);
+    return RestUtils.eitherBadResponse(articleService.bulkCreate(multipartFile));
   }
 
   @PatchMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)

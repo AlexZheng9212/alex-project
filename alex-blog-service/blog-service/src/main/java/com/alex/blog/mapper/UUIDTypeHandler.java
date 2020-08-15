@@ -9,26 +9,26 @@ import java.util.UUID;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
-public class UUIDTypeHandler extends BaseTypeHandler {
+public class UUIDTypeHandler extends BaseTypeHandler<UUID> {
   @Override
-  public Object getNullableResult(ResultSet rs, String columnName) throws SQLException {
+  public UUID getNullableResult(ResultSet rs, String columnName) throws SQLException {
     return UUID.fromString(rs.getString(columnName));
   }
 
   @Override
-  public Object getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+  public UUID getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
     return UUID.fromString(rs.getString(columnIndex));
   }
 
   @Override
-  public Object getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+  public UUID getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
     return UUID.fromString(cs.getString(columnIndex));
   }
 
   @Override
-  public void setNonNullParameter(final PreparedStatement ps, final int i, final Object parameter,
+  public void setNonNullParameter(final PreparedStatement ps, final int i, final UUID parameter,
       final JdbcType jdbcType) throws SQLException {
-    ps.setString(i, ((UUID) parameter).toString());
+    ps.setString(i, parameter.toString());
   }
 
 }
