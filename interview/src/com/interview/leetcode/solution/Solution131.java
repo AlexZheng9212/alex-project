@@ -15,18 +15,16 @@ class Solution131 {
 
     private void dfs(List<List<String>> res, List<String> ans, int start, String s) {
         if (start == length) {
-            System.out.println("end");
-            List<String> temp = new ArrayList<String>(ans);
-            res.add(temp);
+            List<String> tmp = new ArrayList<>(ans);
+            res.add(tmp);
             return;
         }
-        for (int j = start + 1; j < length; j++) {
+        for (int j = start + 1; j <= length; j++) {
             String str = s.substring(start, j);
-            System.out.println("for");
-
+            System.out.println(str);
             if (isPartition(str)) {
                 ans.add(str);
-                dfs(res, ans, j++, s);
+                dfs(res, ans, j, s);
                 ans.remove(ans.size() - 1);
             }
 

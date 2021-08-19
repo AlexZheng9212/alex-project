@@ -30,7 +30,7 @@ public class Trips {
 
   public static void main(String[] args) {
     int[] nums = { 1, 2, 2, 3, 3, 4, 5 };
-    int target = 1;
+    int target = 3;
     Trips trips = new Trips();
     System.out.println(trips.find(nums, target));
   }
