@@ -14,9 +14,10 @@ public class Solution1140 {
     for (int i = n - 1; i >= 0; i--) {
       for (int m = n - 1; m >= 1; m--) {
         for (int x = 1; x <= 2 * m && i + x <= n; x++) {
-
+          dp[i][m] = Math.max(dp[i][m], sums[i] - dp[i + x][Math.max(m, x)]);
         }
       }
     }
+    return dp[0][1];
   }
 }
