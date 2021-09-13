@@ -13,7 +13,6 @@ class Solution152 {
 
             dp[i][1] = Math.max(dp[i][1], dp[i - 1][0] * nums[i]);
             dp[i][1] = Math.max(dp[i][1], dp[i - 1][1] * nums[i]);
-            System.out.println(dp[i][1]);
 
             res = Math.max(res, dp[i][1]);
         }
