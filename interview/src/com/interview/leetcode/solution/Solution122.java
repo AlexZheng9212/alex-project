@@ -19,6 +19,6 @@ public class Solution122 {
 
   public static void main(String[] args) {
     Solution122 solution122 = new Solution122();
-    System.out.println(solution122.maxProfit(new int[] { 7, 1, 5, 3, 6, 4 }));
+    System.out.println(solution122.maxProfit(new int[] { 1, 3, 2, 8, 4, 9 }));
   }
 }
