@@ -24,6 +24,9 @@ public class Solution6 {
   public String convert(String s, int numRows) {
     StringBuilder sb = new StringBuilder();
     int len = s.length();
+    if (len < 2 || numRows < 2) {
+      return s;
+    }
     int delta = 2 * numRows - 2;
     for (int i = 0; i < numRows; i++) {
       for (int j = i; j < len; j = j + delta) {
