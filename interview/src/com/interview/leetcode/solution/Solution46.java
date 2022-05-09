@@ -22,11 +22,29 @@ import java.util.List;
  * 输出：[[1]]
  */
 public class Solution46 {
-  public List<List<Integer>> permute(int[] nums) {
-    List<List<Integer>> ans = new ArrayList<>();
-    int len = nums.length;
-    int[][] tmp = new int[len][len];
-    return ans;
+  List<List<Integer>> ans = new ArrayList<>();
+  List<Integer> tmp = new ArrayList<>();
 
+  public List<List<Integer>> permute(int[] nums) {
+    int len = nums.length;
+    boolean[] st = new boolean[len];
+    dfs(nums, 0, st);
+    return ans;
+  }
+
+  void dfs(int[] nums, int u, boolean[] st) {
+    if (u == nums.length) {
+      ans.add(new ArrayList<>(tmp));
+      return;
+    }
+    for (int i = 0; i < nums.length; i++) {
+      if (st[i] == false) {
+        tmp.add(nums[i]);
+        st[i] = true;
+        dfs(nums, u + 1, st);
+        tmp.remove((Integer) nums[i]);
+        st[i] = false;
+      }
+    }
   }
 }
