@@ -45,8 +45,19 @@ public class WCompetition293_1 {
   }
 
   public static void main(String[] args) {
-    WCompetition293_1 w = new WCompetition293_1();
-    String[] words = { "a", "b", "a" };
-    System.out.println(w.removeAnagrams(words));
+    // WCompetition293_1 w = new WCompetition293_1();
+    // String[] words = { "a", "b", "a" };
+    // System.out.println(w.removeAnagrams(words));
+    String c = "134";
+    String a = new String(c);
+    String b = new String(c);
+    System.out.println(a.hashCode());
+    System.out.println(b.hashCode());
+    System.out.println(c.hashCode());
+    c = "135";
+    System.out.println(a.hashCode());
+    System.out.println(b.hashCode());
+    System.out.println(c.hashCode());
+
   }
 }
