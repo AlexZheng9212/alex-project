@@ -20,6 +20,20 @@ public class Solution80 {
     return res;
   }
 
+  public int removeDuplicatesV2(int[] nums) {
+    return process(nums, 2);
+  }
+
+  private int process(int[] nums, int k) {
+    int u = 0;
+    for (int x : nums) {
+      if (u < k || nums[u - k] != x) {
+        nums[u++] = x;
+      }
+    }
+    return u;
+  }
+
   public static void main(String[] args) {
     Solution80 s = new Solution80();
     int[] nums = new int[] { 1, 1, 1, 2, 2, 3, 3, 3 };
