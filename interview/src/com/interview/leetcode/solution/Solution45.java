@@ -20,4 +20,19 @@ public class Solution45 {
     }
     return dp[dp.length - 1];
   }
+
+  public int jump2(int[] nums) {
+    int n = nums.length;
+    int end = 0;
+    int maxPos = 0;
+    int step = 0;
+    for (int i = 0; i < n - 1; i++) {
+      maxPos = Math.max(maxPos, i + nums[i]);
+      if (i == end) {
+        end = maxPos;
+        step++;
+      }
+    }
+    return step;
+  }
 }
